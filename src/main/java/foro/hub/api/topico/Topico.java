@@ -50,4 +50,8 @@ public class Topico {
             this.mensaje = datosActualizarTopico.mensaje();
         }
     }
+
+    public void consultaResuelta() {
+        this.estadoTopico = true;
+    }
 }

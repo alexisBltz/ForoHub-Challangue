@@ -49,4 +49,14 @@ public class TopicoController {
         return ResponseEntity.ok(new DatosRespuestaTopico(topico));
     }
 
+    //a manera de eliminacion logica, vamos a eliminar tu topico cuando su estado es true, es decir se resolvio la consulta del foro
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosRespuestaTopico> eliminarTopico(@PathVariable Long id){
+        Topico topico = topicoRepository.getReferenceById(id);
+        topico.consultaResuelta();
+        return ResponseEntity.ok(new DatosRespuestaTopico(topico));
+    }
+
+
 }
