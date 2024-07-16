@@ -1,0 +1,1 @@
+alter table topicos drop index autor
