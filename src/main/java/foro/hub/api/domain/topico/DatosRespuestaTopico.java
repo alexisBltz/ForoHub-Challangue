@@ -1,4 +1,6 @@
-package foro.hub.api.topico;
+package foro.hub.api.domain.topico;
+
+import foro.hub.api.domain.autor.DatosAutor;
 
 import java.util.Date;
 
@@ -13,13 +15,13 @@ public record DatosRespuestaTopico(
 
         Boolean estadoTopico,
 
-        String autor,
+        DatosAutor autor,
 
         String curso
 ) {
 
     public DatosRespuestaTopico(Topico topico){
         this(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(),
-                topico.getEstadoTopico(), topico.getAutor(), topico.getCurso());
+                topico.getEstadoTopico(), new DatosAutor(topico.getAutor()), topico.getCurso());
     }
 }

@@ -1,5 +1,6 @@
-package foro.hub.api.topico;
+package foro.hub.api.domain.topico;
 
+import foro.hub.api.domain.autor.Autor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,7 +29,9 @@ public class Topico {
 
     private Date fechaCreacion;
 
-    private String autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="autor_id", nullable=false)
+    private Autor autor;
 
     private String curso;
 
@@ -38,7 +41,7 @@ public class Topico {
         this.mensaje = datosRegistroTopico.mensaje();
         this.estadoTopico = datosRegistroTopico.estadoTopico();
         this.fechaCreacion = datosRegistroTopico.fechaCreacion();
-        this.autor = datosRegistroTopico.autor();
+        this.autor = new Autor(datosRegistroTopico.autor());
         this.curso = datosRegistroTopico.curso();
     }
 

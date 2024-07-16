@@ -1,7 +1,9 @@
 package foro.hub.api.controller;
 
-import foro.hub.api.topico.*;
-import jakarta.persistence.Table;
+import foro.hub.api.domain.autor.Autor;
+import foro.hub.api.domain.autor.AutorRepository;
+import foro.hub.api.domain.autor.DatosRegistroAutor;
+import foro.hub.api.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +22,18 @@ public class TopicoController {
 
     @Autowired
     TopicoRepository topicoRepository;
+    @Autowired
+    AutorRepository autorRepository;
 
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico
             , UriComponentsBuilder uriComponentsBuilder){
+        Autor autor = new Autor();
+        DatosRegistroAutor datosAutor = new DatosRegistroAutor(new Autor (datosRegistroTopico.autor()));
+        autor.setApellidoMaterno(datosRegistroTopico.autor().apellidoPaterno());
+        autor.setNombre(datosRegistroTopico.autor().nombre());
+        autor.setApellidoPaterno(datosRegistroTopico.autor().apellidoPaterno());
+
         Topico topico = topicoRepository.save(new Topico(datosRegistroTopico));
         DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico);
         URI url =uriComponentsBuilder.path("topicos/{id}").buildAndExpand(topico.getId()).toUri();

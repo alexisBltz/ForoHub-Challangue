@@ -1,5 +1,7 @@
-package foro.hub.api.topico;
+package foro.hub.api.domain.topico;
 
+import foro.hub.api.domain.autor.Autor;
+import foro.hub.api.domain.autor.DatosAutor;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -18,13 +20,14 @@ public record DatosRegistroTopico(
         @NotNull
         Date fechaCreacion,
 
-        @NotBlank
-        String autor,
+        @NotNull
+        @Valid
+        DatosAutor autor,
 
         @NotNull
         Boolean estadoTopico,
 
-        @NotNull
+        @NotBlank
         String curso
 ) {
 }
