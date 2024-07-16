@@ -41,4 +41,13 @@ public class Topico {
         this.autor = datosRegistroTopico.autor();
         this.curso = datosRegistroTopico.curso();
     }
+
+    public void actualizarTopico(DatosActualizarTopico datosActualizarTopico) {
+        if(datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if(datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+    }
 }
